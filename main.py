@@ -7,6 +7,8 @@ with sr.Microphone() as source:
     audio = r.listen(source)
 
 try:
-    print(r.recognize_wit(audio,os.environ.get("WIT_API_KEY")))
-except E:
-    print("ERROR",e)
+    print("You said " + r.recognize_wit(audio,os.environ.get("WIT_API_KEY")))
+except sr.UnknownValueError:
+    print("Could not understand audio")
+except sr.RequestError as e:
+    print("Wit error; {0}".format(e))
